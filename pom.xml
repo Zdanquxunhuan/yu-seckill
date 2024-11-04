@@ -5,6 +5,7 @@
 
     <groupId>com.yu</groupId>
     <artifactId>yu-seckill</artifactId>
+    <packaging>pom</packaging>
     <version>0.0.1-SNAPSHOT</version>
     <name>yu-seckill</name>
     <description>yu-seckill</description>
