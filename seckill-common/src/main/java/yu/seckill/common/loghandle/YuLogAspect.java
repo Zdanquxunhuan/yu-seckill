@@ -82,12 +82,12 @@ public class YuLogAspect {
         if (requestAttributes != null) {
             HttpServletRequest request = requestAttributes.getRequest();
             if (request != null) {
-                logRecord = String.format("【%s】", request.getRequestURI());
+                logRecord = String.format("[%s]", request.getRequestURI());
             }
         }
 
         if (yuLogMetrics.logParameters()) {
-            log.info(String.format("【入参日志】调用%s的参数是：【%s】", logRecord, objectMapper.writeValueAsString(pjp.getArgs())));
+            log.info(String.format("[Log of Entry] --- %s ---: 【%s】", logRecord, objectMapper.writeValueAsString(pjp.getArgs())));
         }
 
         // Implement the execution of the join point method,
@@ -102,16 +102,16 @@ public class YuLogAspect {
 
             if(returnValue instanceof ResponseMessage){
                 ResponseMessage<?> responseMessage = (ResponseMessage<?>) returnValue;
-                returnValue="[" + "code" + "]:" + responseMessage.getCode() + "|[" + "data" + "]:" + responseMessage.getCode();
+                returnValue="code" + ":" + responseMessage.getCode() + "|" + "data" + ":" + responseMessage.getData();
             }
 
             if (yuLogMetrics.logAfterExecuteMethodSuccess())
-                log.info(String.format("【成功打点】调用 %s 成功，耗时 %d ms", logRecord, Duration.between(start, Instant.now()).toMillis()));
+                log.info(String.format("[Successful Packing] Call to %s was successful, took %d ms.", logRecord, Duration.between(start, Instant.now()).toMillis()));
         } catch (Exception ex) {
             if (yuLogMetrics.logAfterExecuteMethodFail())
-                log.info(String.format("【失败打点】调用 %s 失败，耗时 %d ms", logRecord, Duration.between(start, Instant.now()).toMillis()));
+                log.info(String.format("[Failed dot] Call %s failed, taking %d ms", logRecord, Duration.between(start, Instant.now()).toMillis()));
             if (yuLogMetrics.logException())
-                log.error(String.format("【异常日志】调用 %s 出现异常!", logRecord), ex);
+                log.error(String.format("[Exception log] An exception occurred in calling %s!", logRecord), ex);
 
             if (yuLogMetrics.ignoreExcepReturnDef())
                 returnValue = getDefaultValue(signature.getReturnType());
@@ -120,7 +120,7 @@ public class YuLogAspect {
         }
 
         if (yuLogMetrics.logReturn())
-            log.info(String.format("【出参日志】调用 %s 的返回是：【%s】", logRecord, returnValue));
+            log.info(String.format("[Exit log] Call %s return is: [%s]", logRecord, returnValue));
         return returnValue;
     }
 }
