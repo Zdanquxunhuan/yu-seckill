@@ -10,7 +10,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
  * @Description:
  */
 @EnableAsync
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"yu.seckill"})
 public class SeckillUserStarter {
 
 

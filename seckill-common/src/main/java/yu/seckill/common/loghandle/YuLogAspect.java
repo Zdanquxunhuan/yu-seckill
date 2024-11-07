@@ -13,6 +13,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import yu.seckill.common.response.ResponseMessage;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Array;
@@ -98,6 +99,12 @@ public class YuLogAspect {
         Instant start = Instant.now();
         try {
             returnValue = pjp.proceed();
+
+            if(returnValue instanceof ResponseMessage){
+                ResponseMessage<?> responseMessage = (ResponseMessage<?>) returnValue;
+                returnValue="[" + "code" + "]:" + responseMessage.getCode() + "|[" + "data" + "]:" + responseMessage.getCode();
+            }
+
             if (yuLogMetrics.logAfterExecuteMethodSuccess())
                 log.info(String.format("【成功打点】调用 %s 成功，耗时 %d ms", logRecord, Duration.between(start, Instant.now()).toMillis()));
         } catch (Exception ex) {
