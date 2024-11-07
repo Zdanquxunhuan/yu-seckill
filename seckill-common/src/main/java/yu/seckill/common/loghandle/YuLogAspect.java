@@ -57,7 +57,7 @@ public class YuLogAspect {
     }
 
     @Around("controllerBean() || withYuMethodLogAnnotation()")
-    public Object doLog(ProceedingJoinPoint pjp) throws Throwable {
+    public void doLog(ProceedingJoinPoint pjp) throws Throwable {
 
         String logRecord = "";
         // 获取方法的名称和参数类型
@@ -87,7 +87,7 @@ public class YuLogAspect {
         }
 
         if (yuLogMetrics.logParameters()) {
-            log.info(String.format("[Log of Entry] --- %s ---: 【%s】", logRecord, objectMapper.writeValueAsString(pjp.getArgs())));
+            log.info(String.format("[Log of Entry]|%s|[%s]", logRecord, objectMapper.writeValueAsString(pjp.getArgs())));
         }
 
         // Implement the execution of the join point method,
@@ -106,12 +106,12 @@ public class YuLogAspect {
             }
 
             if (yuLogMetrics.logAfterExecuteMethodSuccess())
-                log.info(String.format("[Successful Packing] Call to %s was successful, took %d ms.", logRecord, Duration.between(start, Instant.now()).toMillis()));
+                log.info(String.format("[Successful Packing]|%s|took %d ms.", logRecord, Duration.between(start, Instant.now()).toMillis()));
         } catch (Exception ex) {
             if (yuLogMetrics.logAfterExecuteMethodFail())
-                log.info(String.format("[Failed dot] Call %s failed, taking %d ms", logRecord, Duration.between(start, Instant.now()).toMillis()));
+                log.info(String.format("[Failed dot]|%s|taking %d ms", logRecord, Duration.between(start, Instant.now()).toMillis()));
             if (yuLogMetrics.logException())
-                log.error(String.format("[Exception log] An exception occurred in calling %s!", logRecord), ex);
+                log.error(String.format("[Exception log]|%s!", logRecord), ex);
 
             if (yuLogMetrics.ignoreExcepReturnDef())
                 returnValue = getDefaultValue(signature.getReturnType());
@@ -120,7 +120,7 @@ public class YuLogAspect {
         }
 
         if (yuLogMetrics.logReturn())
-            log.info(String.format("[Exit log] Call %s return is: [%s]", logRecord, returnValue));
-        return returnValue;
+            log.info(String.format("[Return result]|%s|[%s]", logRecord, returnValue));
+//        return returnValue;
     }
 }

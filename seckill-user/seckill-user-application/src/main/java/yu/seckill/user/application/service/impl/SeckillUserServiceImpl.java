@@ -21,7 +21,7 @@ public class SeckillUserServiceImpl implements SeckillUserService {
 
     @Override
     public SeckillUser getSeckillUserByUserName(String userName) {
-        log.info("seckill-user|获取用户信息|{}", userName);
+//        log.info("seckill-user|获取用户信息|{}", userName);
         SeckillUser seckillUser = seckillUserRepository.getSeckillUserByUserName(userName);
         if (seckillUser != null){
             seckillUser.setPassword("");
