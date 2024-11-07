@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import yu.seckill.common.constants.SeckillConstants;
 import yu.seckill.common.exception.ErrorCode;
+import yu.seckill.common.loghandle.YuLogMetrics;
 import yu.seckill.common.response.ResponseMessage;
 import yu.seckill.common.response.ResponseMessageBuilder;
 import yu.seckill.user.application.service.SeckillUserService;
@@ -31,7 +32,7 @@ public class SeckillUserController {
      */
     @RequestMapping(value = "/get", method = {RequestMethod.GET, RequestMethod.POST})
     public ResponseMessage<SeckillUser> get(@RequestHeader(SeckillConstants.USER_ID) Long userId, @RequestParam String username){
-        log.info("SeckillUserController|获取到的userId|{}", userId);
+//        log.info("SeckillUserController|获取到的userId|{}", userId);
         return ResponseMessageBuilder.build(ErrorCode.SUCCESS.getCode(), seckillUserService.getSeckillUserByUserName(username));
     }
 }

@@ -1,6 +1,7 @@
 package com.yu.seckill.user.infrastructure.mapper;
 
 import com.yu.seckill.user.domain.model.entity.SeckillUser;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -8,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
  * @date 2024/11/4
  * @description
  */
+@Mapper
 public interface SeckillUserMapper {
 
     /**
