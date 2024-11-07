@@ -14,6 +14,7 @@ public enum ErrorCode {
     PASSWORD_IS_NULL(2004, "密码不能为空"),
     USERNAME_IS_ERROR(2005, "用户名错误"),
     PASSWORD_IS_ERROR(2006, "密码错误"),
+    SERVER_EXCEPTION(2007, "服务器异常"),
     ;
 
     private final Integer code;
