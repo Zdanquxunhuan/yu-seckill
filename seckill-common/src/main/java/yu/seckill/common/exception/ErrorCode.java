@@ -7,14 +7,14 @@ package yu.seckill.common.exception;
  */
 public enum ErrorCode {
 
-    SUCCESS(1001, "成功"),
-    FAILURE(2001, "失败"),
-    PARAMS_INVALID(2002, "参数错误"),
-    USERNAME_IS_NULL(2003, "用户名不能为空"),
-    PASSWORD_IS_NULL(2004, "密码不能为空"),
-    USERNAME_IS_ERROR(2005, "用户名错误"),
-    PASSWORD_IS_ERROR(2006, "密码错误"),
-    SERVER_EXCEPTION(2007, "服务器异常"),
+    SUCCESS(1001, "success"),
+    FAILURE(2001, "fail"),
+    PARAMS_INVALID(2002, "Parameter error"),
+    USERNAME_IS_NULL(2003, "User name cannot be empty"),
+    PASSWORD_IS_NULL(2004, "Password cannot be empty"),
+    USERNAME_IS_ERROR(2005, "User name error"),
+    PASSWORD_IS_ERROR(2006, "Password error"),
+    SERVER_EXCEPTION(2007, "Server error"),
     ;
 
     private final Integer code;

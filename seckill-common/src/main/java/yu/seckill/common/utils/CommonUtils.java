@@ -2,6 +2,7 @@ package yu.seckill.common.utils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.CollectionUtils;
+import yu.seckill.common.exception.ErrorCode;
 import yu.seckill.common.exception.SeckillException;
 
 import java.util.Collection;
@@ -36,6 +37,33 @@ public class CommonUtils {
         if (obj instanceof Map) {
             if (MapUtils.isEmpty((Map<?, ?>) obj)) {
                 throw new SeckillException(msg);
+            }
+        }
+
+        return obj;
+    }
+
+    public static <T> T requireNonNull(T obj, ErrorCode errorCode) {
+
+        if (obj == null) {
+            throw new SeckillException(errorCode);
+        }
+
+        if (obj instanceof String) {
+            if (StringUtils.isBlank((String) obj)) {
+                throw new SeckillException(errorCode);
+            }
+        }
+
+        if (obj instanceof Collections) {
+            if (CollectionUtils.isEmpty((Collection<?>) obj)) {
+                throw new SeckillException(errorCode);
+            }
+        }
+
+        if (obj instanceof Map) {
+            if (MapUtils.isEmpty((Map<?, ?>) obj)) {
+                throw new SeckillException(errorCode);
             }
         }
 
