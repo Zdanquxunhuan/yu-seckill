@@ -26,7 +26,7 @@ public class SeckillConstants {
 
 
     /**
-     * token的载荷中盛放的信息 只盛放一个userName 其余什么也不再盛放
+     * token的载荷中盛放的信息 只盛放一个userId 其余什么也不再盛放
      */
     public static final String TOKEN_CLAIM = "userId";
 
